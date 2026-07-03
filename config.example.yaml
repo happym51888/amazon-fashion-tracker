@@ -1,0 +1,73 @@
+# ============================================================
+# Amazon 服装趋势追踪器 - 配置文件
+# 复制此文件为 config.yaml 并填入你的实际信息
+# ============================================================
+
+email:
+  # 发件人设置（支持 QQ邮箱 / 163邮箱 / Gmail）
+  smtp_server: "smtp.qq.com"       # QQ: smtp.qq.com | 163: smtp.163.com | Gmail: smtp.gmail.com
+  smtp_port: 465                    # SSL端口，通常为 465
+  use_ssl: true
+  sender: "your_email@qq.com"
+  # QQ邮箱请使用授权码（非登录密码），在 设置 > 账户 > POP3/SMTP服务 中获取
+  password: "your_smtp_authorization_code"
+  # 收件人列表
+  recipients:
+    - "your_email@example.com"
+
+scraper:
+  # 要追踪的服装子类目（可按需增减）
+  categories:
+    overall_fashion:
+      name: "服装综合"
+      url: "/Best-Sellers-Clothing-Shoes-Jewelry/zgbs/fashion/"
+      movers_url: "/gp/movers-and-shakers/fashion/"
+    womens_clothing:
+      name: "女装"
+      url: "/Best-Sellers-Womens-Clothing/zgbs/fashion/1040660/"
+      movers_url: "/gp/movers-and-shakers/fashion/1040660/"
+    mens_clothing:
+      name: "男装"
+      url: "/Best-Sellers-Mens-Clothing/zgbs/fashion/1040658/"
+      movers_url: "/gp/movers-and-shakers/fashion/1040658/"
+
+  # 每个类目抓取的商品数量上限
+  max_products_per_category: 50
+  # 请求间随机延迟范围（秒），避免被封
+  delay_min: 3
+  delay_max: 8
+  # 请求超时（秒）
+  timeout: 30
+  # 失败重试次数
+  max_retries: 3
+
+report:
+  # 邮件报告中展示的 Top N 商品
+  top_n: 20
+  bestseller_limit: 20
+  mover_limit: 20
+  # 报告语言
+  language: "zh"
+  # 是否在邮件中嵌入商品图片（true=嵌入, false=仅链接）
+  embed_images: false
+  # 下载图片的最大尺寸（像素）
+  image_max_width: 300
+
+prediction:
+  top_n: 10
+  google_trends_enabled: true
+  google_geo: "US"
+  google_timeframe: "today 3-m"
+  google_timeout: 4
+
+schedule:
+  # 每天执行时间（24小时制，北京时间）
+  run_time: "08:00"
+  # 时区
+  timezone: "Asia/Shanghai"
+
+storage:
+  # SQLite 数据库文件路径
+  db_path: "data/fashion_tracker.db"
+  # 图片缓存目录
+  image_dir: "data/images"
